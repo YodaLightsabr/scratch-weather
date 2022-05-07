@@ -4,5 +4,23 @@
     "node-fetch": "^3.2.4",
     "scratch-api": "^1.1.12"
   },
-  "type": "module"
+  "type": "module",
+  "name": "scratch-weather",
+  "version": "1.0.0",
+  "description": "scratch weather",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YodaLightsabr/scratch-weather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YodaLightsabr/scratch-weather/issues"
+  },
+  "homepage": "https://github.com/YodaLightsabr/scratch-weather#readme"
 }
