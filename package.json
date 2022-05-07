@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "node-fetch": "^3.2.4",
+    "scratch-api": "^1.1.12"
+  },
+  "type": "module"
+}

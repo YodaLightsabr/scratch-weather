@@ -1,0 +1,5 @@
+.env
+.scratchSession
+creds.password
+creds.username
+weather.key
