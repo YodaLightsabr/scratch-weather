@@ -1,5 +1,6 @@
 import Scratch from 'scratch-api';
 import fetch from 'node-fetch';
+import express from 'express';
 
 import { encode, decode } from './encoder.js';
 import { createQueue } from './queue.js';
@@ -73,4 +74,12 @@ Scratch.UserSession.create(username, password, function(err, user) {
         });
 
     });
+});
+
+const app = express();
+app.get('/', (req, res) => {
+    res.send('OK');
+});
+app.listen(8080, () => {
+    console.log('Listening on *:8080');
 });
