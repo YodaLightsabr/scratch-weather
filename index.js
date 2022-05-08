@@ -61,7 +61,7 @@ Scratch.UserSession.create(username, password, function(err, user) {
                     data?.location?.name + ', ' + data?.location?.region
                 ) : data?.location?.name
             ) : 'Unknown');
-            const details = `Humidity: ${data?.current?.humidity ?? '0'}%  |  Wind: ${data?.current?.wind_mph ?? '0'}mph${data?.current?.wind_dir ? (' ' + data?.current?.wind_dir) : ''}  |  Precipitation: ${data?.current?.precip_in ?? '0'}in`;
+            const details = `Humidity: ${data?.current?.humidity ?? '0'}%  |  Wind: ${data?.current?.wind_mph ?? '0'} mph  |  Precipitation: ${data?.current?.precip_in ?? '0'} in`;
             cloud.set('☁ TEMP', encode(temperature));
             await sleep(500);
             cloud.set('☁ LOCATION', encode(city));
