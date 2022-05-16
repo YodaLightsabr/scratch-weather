@@ -9,11 +9,9 @@ export function transformUppercase (char) {
 }
 
 export function encode (text) {
-    const encoded = (new String(text)).split('').map(transformUppercase).map(char => ((chars.indexOf(char) + 1) || '36')).join('');
-    console.log({ encoded, text, decoded: decode(encoded), d: decode(encoded).includes('Υ') })
-    return encoded;
+    return (new String(text) || '').split('').map(transformUppercase).map(char => ((chars.indexOf(char) + 1) || '36')).join('');
 }
 
 export function decode (data) {
-    return (new String(data)).match(/.{1,2}/g).map(num => chars[+num - 1]).join('');
+    return (new String(data) || '').match(/.{1,2}/g).map(num => chars[+num - 1]).join('');
 }
