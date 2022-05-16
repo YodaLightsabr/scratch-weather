@@ -34,9 +34,12 @@ function cutOff (str) {
 }
 
 Scratch.UserSession.create(username, password, function(err, user) {
+    if (err) console.error(err);
+    console.log('Logged in');
 
     user.cloudSession(686722628, function(err, cloud) {
-
+        if (err) console.error(err);
+        console.log('Connected');
         cloud.on('set', function(name, value) {
             console.log({ name, value });
             if (name === '☁ ASK' && value != '0') queue.push(decode(value));
@@ -51,8 +54,29 @@ Scratch.UserSession.create(username, password, function(err, user) {
         queue.handleInterval(3000, async location => {
             console.log(`Handling ${location}`);
             const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${weatherKey}&q=${encodeURIComponent(location)}&aqi=no`);
-            const data = await response.json();
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (err) {
+                data.error = err;
+            }
             console.log(data);
+            if (data.error) {
+                console.log('Handling error');
+                cloud.set('☁ TEMP', encode('0'));
+                await sleep(500);
+                cloud.set('☁ LOCATION', encode('Not Found'));
+                await sleep(500);
+                cloud.set('☁ WEATHER', encode('Not Found'));
+                await sleep(500);
+                cloud.set('☁ ICON', encode('113-day'));
+                await sleep(500);
+                cloud.set('☁ DETAILS', encode('You entered an invalid location.'));
+                await sleep(500);
+                cloud.set('☁ ID', encode(location));
+    
+                return;
+            };
             const condition = data?.current?.condition?.text ?? 'Unknown';
             const temperature = data?.current?.temp_f ?? '0';
             const icon = getIcon(data?.current?.condition?.icon);
